@@ -1,0 +1,2 @@
+wholestring = "iVlrR7EyV8B61eTXj0vnRzYRfBtABUJ4ehfbkExB9aL9SjWY2SQTQfhBgg1HwkiMOfAHMJhIpHARDEEAZpDlcGVOphisops7kq8evt953aCM1Dxl0b2gC5Ov0belliiBFqIzxNzDbR9P5mSfaKdPvJy7Ne7MC2FBGB6hFu5VrIbOpSPDxdwTN7wbnYuEkdk6." #assign the string s to wholestring
+print wholestring [87:95] + " " + wholestring [121:127] #print only desired indeces of string. when splicing, include one number after the index desired. 
