@@ -44,8 +44,10 @@ def InsertZ(pt, zt): #will add the Z to the P
             cc = cs[1]
             csn = cs[0]
             while i < cc: #add csn to as many cc lines 
-                np.put (pt[i], 2, csn)
+                np.put (pt[row], 2, csn)
                 i +=1
+                row = row + 1
+            i = 0
     return pt
 
 ParsedTable = ReadIntoTable('Results.txt')
@@ -54,65 +56,11 @@ print z #prints the ztable
 #print ParsedTable #prints the parsed results table
 newtable = InsertZ (ParsedTable, z)
 print newtable
-#for thing in ParsedTable:
-#    np.put(thing, 2, 1)
-#    print thing
-##def InsertZ (pt, zt):
-##    i = follow length of ztable
-##    j = follow length of results table
-##    #z[...,1] = all counts
-##    cs = zt [...,0]
-##    counts = zt[...,1]
-##    while i < len(zt): #iterate through z table
-##        for count in counts: #iterate through counts
-##            if count > 0:
-##                while j < count:
-##                    print 
-##                #get cross section and insert into 
+
                 
              
         
     
     
 
-##def insertZ (potato, zoo):
-##    i = 0 #follow length of zoo, and CS
-##    flag = 0 #keep up with the Parser table. and CC
-##    lengthZ = len(zoo) #final length of the z table
-##    temp_info_holder = [] #stores XY
-##    Pillow = [] #final list of updated info holding XYZ
-##    for num in zoo: #iterate through Z, get the cell counts per cross section
-##        while i < lengthZ: 
-##            item = zoo[i] #the element holding CS and CC
-##            item = item[1] #item has become the cell count
-##            if item > 0: #if there is a cell
-##                for order in range(item):
-##                    temp = (potato[flag])
-##                    temp.append(i + 1)
-##                    Pillow.append(temp)
-##                    #print(potato[flag])#.append(i) #the cell info
-##                    print(i + 1) #the CS
-##                    flag = flag + 1 #move up to next CC
-##            #print(item)
-##            i = i + 1
-##    
-##            
-##    return 4
-##
-##hi = insertZ (ParsedTable, z)
 
-#print z
-
-##print hi
-
-
-##def CompareCells(editedtable): #take in the edited table array
-##    for row in 
-
-##class CellCounter (editedtable):
-##    for row in table:
-##        Cellnumber = row[0]
-##        Area = row[1]
-##        Xstart = row[2]
-##        Ystart = row[3]
-##    
