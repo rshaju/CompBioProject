@@ -31,20 +31,49 @@ def ReadIntoTable(resultsfile): #function to read Restuls into table
     table = np.loadtxt(resultsfile, skiprows=1)
     #Table: [0] = cell; [1] = area [2-7; don't want]
     #[8] = Xcoordinate [9] = Ycoordinate
-    tableAXY = np.delete(table, np.s_[2:8], 1) #delete 2-7
+    tableAXY = np.delete(table, np.s_[3:8], 1) #delete 2-7
     #print headerAXY
     return tableAXY
     #print tableAXY #table includes: cell, area, x, y
 
+def InsertZ(pt, zt): #will add the Z to the P
+    row = 0
+    i=0
+    for cs in zt:
+        if cs[1] > 0:
+            cc = cs[1]
+            csn = cs[0]
+            while i < cc: #add csn to as many cc lines 
+                np.put (pt[i], 2, csn)
+                i +=1
+    return pt
+
 ParsedTable = ReadIntoTable('Results.txt')
 z = Ztable ('ZtableResults.txt')
-print z
-
-##def InsertZ (ptable, ZTABLE):
-##    i = 0 #follow length of ztable
-##    j = 0 #follow parser table
-##    lengthZ = len(ZTABLE)
-
+print z #prints the ztable
+#print ParsedTable #prints the parsed results table
+newtable = InsertZ (ParsedTable, z)
+print newtable
+#for thing in ParsedTable:
+#    np.put(thing, 2, 1)
+#    print thing
+##def InsertZ (pt, zt):
+##    i = follow length of ztable
+##    j = follow length of results table
+##    #z[...,1] = all counts
+##    cs = zt [...,0]
+##    counts = zt[...,1]
+##    while i < len(zt): #iterate through z table
+##        for count in counts: #iterate through counts
+##            if count > 0:
+##                while j < count:
+##                    print 
+##                #get cross section and insert into 
+                
+             
+        
+    
+    
 
 ##def insertZ (potato, zoo):
 ##    i = 0 #follow length of zoo, and CS
@@ -73,7 +102,7 @@ print z
 ##hi = insertZ (ParsedTable, z)
 
 #print z
-print ParsedTable
+
 ##print hi
 
 
