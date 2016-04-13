@@ -1,7 +1,7 @@
 import os
 import numpy as np
 from csv import reader
-filepath = '/Users/yatri/Desktop/'
+filepath = '/Users/Rahul/Desktop/'
 os.chdir(filepath)
 
 def Ztable (zfile): #function to read in Z file
@@ -64,7 +64,27 @@ newtable = InsertZ (ParsedTable, z)
 newtable = AddBinaryKey(newtable)
 print newtable
 
-                
+
+def CountFunction(nt):
+    cellcount = 0
+    flag = 0
+    for item1 in nt:
+        tempX = item1[4]
+        tempY = item1[5]
+        tempZ = item1[3]
+        for item2 in nt:
+            if item2[2] == 0:
+                if item2[3] == tempZ + 1:
+                    tempZ += 1
+                    CompareX = abs(item2[4] - tempX)
+                    CompareY = abs(item2[5] - tempY)
+                    if 0 <= CompareX or CompareY <= 7:
+                        item2[2] == 1
+                    flag += 1
+    cellcount += 1
+    return cellcount
+
+print CountFunction(newtable)
              
         
     
