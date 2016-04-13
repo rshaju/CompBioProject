@@ -31,7 +31,7 @@ def ReadIntoTable(resultsfile): #function to read Restuls into table
     table = np.loadtxt(resultsfile, skiprows=1)
     #Table: [0] = cell; [1] = area [2-7; don't want]
     #[8] = Xcoordinate [9] = Ycoordinate
-    tableAXY = np.delete(table, np.s_[3:8], 1) #delete 2-7
+    tableAXY = np.delete(table, np.s_[4:8], 1) #delete 2-7
     #print headerAXY
     return tableAXY
     #print tableAXY #table includes: cell, area, x, y
@@ -44,17 +44,24 @@ def InsertZ(pt, zt): #will add the Z to the P
             cc = cs[1]
             csn = cs[0]
             while i < cc: #add csn to as many cc lines 
-                np.put (pt[row], 2, csn)
+                np.put (pt[row], 3, csn)
                 i +=1
                 row = row + 1
             i = 0
     return pt
+
+def AddBinaryKey (nt):
+    for line in range(len(nt)):
+        np.put(nt[line], 2, 0)
+    return nt
+
 
 ParsedTable = ReadIntoTable('Results.txt')
 z = Ztable ('ZtableResults.txt')
 print z #prints the ztable
 #print ParsedTable #prints the parsed results table
 newtable = InsertZ (ParsedTable, z)
+newtable = AddBinaryKey(newtable)
 print newtable
 
                 
