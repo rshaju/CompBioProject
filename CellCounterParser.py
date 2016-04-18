@@ -1,7 +1,7 @@
 import os
 import numpy as np
 from csv import reader
-filepath = '/Users/Rahul/Desktop/'
+filepath = '/Users/Salma/Desktop/'
 os.chdir(filepath)
 
 def Ztable (zfile): #function to read in Z file
@@ -21,14 +21,14 @@ def Ztable (zfile): #function to read in Z file
             Zlist.append(zlist) #add new list to list holding all cs & cc
     Zlist = np.array(Zlist) #convert & return as numpy array
     return Zlist
-            
-    
+
+
 def ReadIntoTable(resultsfile): #function to read Restuls into table
     f = open (resultsfile) #opens the results file
     headers = f.readline() #read the headers, if we need this later, we can use it
-    headers = headers.strip().split() 
+    headers = headers.strip().split()
     headerAXY = ['Cell',headers[0],headers[7],headers[8]] #keep header labels
-    table = np.loadtxt(resultsfile, skiprows=1) #read table as numpy array 
+    table = np.loadtxt(resultsfile, skiprows=1) #read table as numpy array
     tableAXY = np.delete(table, np.s_[4:8], 1) #delete 4-7, keep 2&3 to overwrite later
     return tableAXY
     #print tableAXY #table includes: cell, area, x, y #debugging
@@ -40,9 +40,9 @@ def InsertZ(pt, zt): #will add the Z to the Parsed results table
         if cs[1] > 0: #if the 1st index contains a cell count (more than 0)
             cc = cs[1] #set cell count equal to the 1st index of the cell count
             csn = cs[0] #set the cross section number equal to the 0th index
-            while i < cc: #add csn to as many cell count lines 
+            while i < cc: #add csn to as many cell count lines
                 np.put (pt[row], 3, csn) #replace the 3rd index of the Parsed table with cross section
-                i +=1 #increment to indicate you added 
+                i +=1 #increment to indicate you added
                 row = row + 1 #increment to continue to track row
             i = 0 #after adding to the number of cell count lines, set i to zero
     return pt #return the edited parsed table
@@ -53,38 +53,43 @@ def AddBinaryKey (nt): #function takes in the newly edited parsed table to add k
     return nt #return the edited table again
 
 
-ParsedTable = ReadIntoTable('Results.txt')
-z = Ztable ('ZtableResults.txt')
+ParsedTable = ReadIntoTable('Results_table.txt')
+z = Ztable ('z_table.txt')
 #print z #prints the ztable
 #print ParsedTable #prints the parsed results table
 newtable = InsertZ (ParsedTable, z)
 newtable = AddBinaryKey(newtable)
-print newtable
+#print newtable
 
 
 def CountFunction(nt):
     cellcount = 0
     flag = 0
     for item1 in nt:
-        tempX = item1[4]
-        tempY = item1[5]
-        tempZ = item1[3]
-        for item2 in nt:
-            if item2[2] == 0:
-                if item2[3] == tempZ + 1:
-                    tempZ += 1
-                    CompareX = abs(item2[4] - tempX)
-                    CompareY = abs(item2[5] - tempY)
-                    if 0 <= CompareX or CompareY <= 7:
-                        item2[2] == 1
-                    flag += 1
-    cellcount += 1
-    return cellcount
+        if item1[2] == 0:
+            if item1[0] == 4.:
+                print "poop"
+            tempX = item1[4]
+            tempY = item1[5]
+            tempZ = item1[3]
+            ###############################################################
+            np.put(item1, 2, 1)##
+            ###############################################################
+            cellcount += 1
 
-print CountFunction(newtable)
-             
-        
-    
+            for item2 in nt:
+                if item2[2] == 0:
+                    if item2[3] == tempZ + 1:
+                        tempZ += 1
+                        CompareX = abs(item2[4] - tempX)
+                        CompareY = abs(item2[5] - tempY)
+                        if 0 <= CompareX or CompareY <= 7:
+                            #tempZ += 1
+                            #item2[2] == 1
+                            np.put(item2, 2, 1)
+    return cellcount + 1
+
+print CountFunction(newtable)    
     
 
 
