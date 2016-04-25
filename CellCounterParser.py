@@ -3,7 +3,7 @@ import numpy as np
 from csv import reader
 import math
 
-filepath = '/Users/Salma/Desktop/'
+filepath = '/Users/Rahul/Desktop/'
 os.chdir(filepath)
 
 
@@ -137,17 +137,26 @@ def SingleCellCounter(nt, avg_area, error):
     return cellcount
 
 def BlobDestroyer (nt, avg_area):
+    total = 0
+    numz = 0
+    for item in nt:
+        if item[2] == 2:
+            numz = math.floor(item[1]/avg_area)
+            total += numz
 
-    #This function will  assess blobs
-    #Will get average blobs per
+
+    return  total
+
+
 
 
 size_threshold = 50.87 #user input
-error = 10 #user input
-
+error = 15 #user input
+FinalCount = 0 #number of final cells to output to user
 SingleCount = 0 #number of individual cells
-ParsedTable = ReadIntoTable('Results_table.txt')
-z = Ztable ('z_table.txt')
+
+ParsedTable = ReadIntoTable('R.txt')
+z = Ztable ('Z.txt')
 #print z #prints the ztable
 #print ParsedTable #prints the parsed results table
 
@@ -158,6 +167,14 @@ size_list = AreaCheck(newtable) #size list
 avg_area = SortandSpit(size_list, size_threshold) #uses size list for getting single cell avg_area
 newtable = Blobtagger(newtable, avg_area) #All Blobs will have "2" as a key
 SingleCount = SingleCellCounter(newtable, avg_area, error)
+BlobAverage = BlobDestroyer(newtable, avg_area)
 
+print avg_area
+print BlobAverage
+
+FinalCount = SingleCount + BlobAverage
 print SingleCount
 print newtable
+print FinalCount
+FinalCount = str(FinalCount)
+print ("Congrats! You have " + FinalCount + " cells! Have a good day nigga")
