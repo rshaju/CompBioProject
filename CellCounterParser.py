@@ -1,8 +1,11 @@
 import os
 import numpy as np
 from csv import reader
+import math
+
 filepath = '/Users/Salma/Desktop/'
 os.chdir(filepath)
+
 
 def Ztable (zfile): #function to read in Z file
     csv_reader = reader(open(zfile,'r'), quotechar = "\"") #Read in the file
@@ -53,43 +56,108 @@ def AddBinaryKey (nt): #function takes in the newly edited parsed table to add k
     return nt #return the edited table again
 
 
+#def SingleCellCountFunction(nt, avg_area):
+#    cellcount = 0
+#    list1 = []
+#    flag = 0
+#    for item1 in nt:
+#        if item1[2] == 0:
+#            flag = BlobTracker(item1[1], avg_area)
+#            print flag, item1[1]
+#            tempX = item1[4]
+#            tempY = item1[5]
+#            tempZ = item1[3]
+#            if flag < 1: #change only individual cells
+#                np.put(item1, 2, 1)
+#                cellcount += 1
+#                #cellcount = cellcount + flag
+#            if item1[1] > avg_area:
+#                list1.append(item1)
+#            for item2 in nt:
+#                if item2[2] == 0 and flag <= 1: # lets only filter our individual cells, no blobs
+#                    if item2[3] == tempZ + 1:
+#                        tempZ += 1
+#                        CompareX = abs(item2[4] - tempX)
+#                        CompareY = abs(item2[5] - tempY)
+#                        if 0 <= (CompareX or CompareY)  <= 7:
+#                            np.put(item2, 2, 1)
+#    return cellcount + 1
+
+
+def AreaCheck (nt): #creates a list of only area's
+    size_list = [] #empty list
+    for item in nt:
+        temp = item[1]
+        size_list.append(temp) #adds area to size_list
+    return size_list
+
+def SortandSpit (st, th): #takes area list, and takes average of single cell sizes
+    flag = 0 #keeps track of number of cells
+    total = 0.0 #all sums appended
+    for item in st:
+        if item < th*2: #only adds item if below user-input-threshold times 2
+            total = total + item
+            flag = flag + 1
+    total = total/flag
+    return total
+
+#################################################################
+def BlobTracker (blob, avg_area):    #Both can be combined     ##
+    cellcount = blob/avg_area        #into one function        ##
+    cellcount = math.floor(cellcount)
+    return cellcount
+
+def Blobtagger (nt, avg_area):
+    for item in nt:
+        tag = BlobTracker(item[1], avg_area)
+        if tag >= 2.0:
+            np.put(item, 2, 2)                                 ##
+    return nt                                                  ##
+#################################################################
+
+def SingleCellCounter(nt, avg_area, error):
+    cellcount = 0
+    Xerror = 0
+    Yerror = 0
+    for item1 in nt:
+        if item1[2] == 0:
+            np.put(item1, 2, 1) #Cell key set to 1
+            tempX = item1[4]
+            tempY = item1[5]
+            tempZ = item1[3]
+            cellcount += 1
+            for item2 in nt:
+                if item2[2] == 0: #see if unchecked cell
+                    if item2[3] == tempZ + 1: #see if cell in next cross section
+                        Xerror = abs(tempX - item2[4]) #diff between X coordinates
+                        Yerror = abs(tempY - item2[5]) #diff between Y coordinates
+                        if (Xerror <= error) and (Yerror <= error):
+                            tempZ = tempZ + 1 #move to next cross section
+                            np.put(item2, 2, 1) #set cells accounted for
+    return cellcount
+
+def BlobDestroyer (nt, avg_area):
+
+    #This function will  assess blobs
+    #Will get average blobs per
+
+
+size_threshold = 50.87 #user input
+error = 10 #user input
+
+SingleCount = 0 #number of individual cells
 ParsedTable = ReadIntoTable('Results_table.txt')
 z = Ztable ('z_table.txt')
 #print z #prints the ztable
 #print ParsedTable #prints the parsed results table
-newtable = InsertZ (ParsedTable, z)
-newtable = AddBinaryKey(newtable)
-#print newtable
 
+newtable = InsertZ (ParsedTable, z) #adds Z coordinate
+newtable = AddBinaryKey(newtable) #adds empty zeroes for key variable
 
-def CountFunction(nt):
-    cellcount = 0
-    flag = 0
-    for item1 in nt:
-        if item1[2] == 0:
-            if item1[0] == 4.:
-                print "poop"
-            tempX = item1[4]
-            tempY = item1[5]
-            tempZ = item1[3]
-            ###############################################################
-            np.put(item1, 2, 1)##
-            ###############################################################
-            cellcount += 1
+size_list = AreaCheck(newtable) #size list
+avg_area = SortandSpit(size_list, size_threshold) #uses size list for getting single cell avg_area
+newtable = Blobtagger(newtable, avg_area) #All Blobs will have "2" as a key
+SingleCount = SingleCellCounter(newtable, avg_area, error)
 
-            for item2 in nt:
-                if item2[2] == 0:
-                    if item2[3] == tempZ + 1:
-                        tempZ += 1
-                        CompareX = abs(item2[4] - tempX)
-                        CompareY = abs(item2[5] - tempY)
-                        if 0 <= CompareX or CompareY <= 7:
-                            #tempZ += 1
-                            #item2[2] == 1
-                            np.put(item2, 2, 1)
-    return cellcount + 1
-
-print CountFunction(newtable)    
-    
-
-
+print SingleCount
+print newtable
