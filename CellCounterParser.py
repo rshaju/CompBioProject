@@ -177,4 +177,4 @@ print SingleCount
 print newtable
 print FinalCount
 FinalCount = str(FinalCount)
-print ("Congrats! You have " + FinalCount + " cells! Have a good day nigga")
+print ("Congrats! You have " + FinalCount + " cells!")
