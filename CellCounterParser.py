@@ -2,9 +2,12 @@ import os
 import numpy as np
 from csv import reader
 import math
+import Tkinter, tkFileDialog, Tkconstants
+from Tkinter import *
 
-filepath = '/Users/Rahul/Desktop/'
-os.chdir(filepath)
+
+#filepath = '/Users/Rahul/Desktop/'
+#os.chdir(filepath)
 
 
 def Ztable (zfile): #function to read in Z file
@@ -27,7 +30,7 @@ def Ztable (zfile): #function to read in Z file
 
 
 def ReadIntoTable(resultsfile): #function to read Restuls into table
-    f = open (resultsfile) #opens the results file
+    f = open (resultsfile,'r') #opens the results file
     headers = f.readline() #read the headers, if we need this later, we can use it
     headers = headers.strip().split()
     headerAXY = ['Cell',headers[0],headers[7],headers[8]] #keep header labels
@@ -149,32 +152,104 @@ def BlobDestroyer (nt, avg_area):
 
 
 
+def Main(Ztable1,Rtable):
+    size_threshold = 50.87 #user input
+    error = 15 #user input
+    FinalCount = 0 #number of final cells to output to user
+    singleCount = 0 #number of individual cells
 
-size_threshold = 50.87 #user input
-error = 15 #user input
-FinalCount = 0 #number of final cells to output to user
-SingleCount = 0 #number of individual cells
 
-ParsedTable = ReadIntoTable('R.txt')
-z = Ztable ('Z.txt')
-#print z #prints the ztable
-#print ParsedTable #prints the parsed results table
+    ParsedTable = ReadIntoTable(Rtable)
+    z = Ztable (Ztable1)
+    #print z #prints the ztable
+    #print ParsedTable #prints the parsed results table
 
-newtable = InsertZ (ParsedTable, z) #adds Z coordinate
-newtable = AddBinaryKey(newtable) #adds empty zeroes for key variable
+    newtable = InsertZ (ParsedTable, z) #adds Z coordinate
+    newtable = AddBinaryKey(newtable) #adds empty zeroes for key variable
 
-size_list = AreaCheck(newtable) #size list
-avg_area = SortandSpit(size_list, size_threshold) #uses size list for getting single cell avg_area
-newtable = Blobtagger(newtable, avg_area) #All Blobs will have "2" as a key
-SingleCount = SingleCellCounter(newtable, avg_area, error)
-BlobAverage = BlobDestroyer(newtable, avg_area)
+    size_list = AreaCheck(newtable) #size list
+    avg_area = SortandSpit(size_list, size_threshold) #uses size list for getting single cell avg_area
+    newtable = Blobtagger(newtable, avg_area) #All Blobs will have "2" as a key
+    SingleCount = SingleCellCounter(newtable, avg_area, error)
+    BlobAverage = BlobDestroyer(newtable, avg_area)
 
-print avg_area
-print BlobAverage
+    #print avg_area
+    #print BlobAverage
 
-FinalCount = SingleCount + BlobAverage
-print SingleCount
-print newtable
-print FinalCount
-FinalCount = str(FinalCount)
-print ("Congrats! You have " + FinalCount + " cells!")
+    FinalCount = singleCount + BlobAverage
+    #print SingleCount
+    #print newtable
+    #print FinalCount
+    FinalCount = str(FinalCount)
+    Results = ("Congrats! You have " + FinalCount + " cells!")
+    return Results
+
+class Application(Frame):
+
+    def __init__(self, master):
+        Frame.__init__(self, master)
+        self.grid()
+
+
+        self.dir_opts = options = {}
+        options['initialdir'] = 'C:\\'
+        options['mustexist'] = False
+        options['parent'] = master
+        options['title'] = 'This is a title'
+
+        self.file_opt = options = {}
+        options['defaultextension'] = '.txt'
+        options['filetypes'] = [('all files', '.*'), ('text f    iles', '.txt')]
+        options['initialdir'] = 'C:\\'
+        options['initialfile'] = 'myfile.txt'
+        options['parent'] = master
+        options['title'] = 'This is a title'
+
+        self.create_widgets()
+
+
+    def create_widgets(self):
+        self.instruction = Label(self, text="Ztable Directory")
+        self.instruction2 = Label(self, text="Cell Location Table")
+        self.instruction.grid(row = 1, column = 0, columnspan = 2, sticky = W)
+        self.instruction2.grid(row= 2, column= 0, columnspan = 2, sticky = W)
+        self.text = Text(self, width = 50, height = 1, wrap = WORD)
+        self.textp = Text(self, width = 50, height = 1, wrap = WORD)
+        self.text.grid(row =1, column = 2, columnspan = 1, sticky = W)
+        self.textp.grid(row =2, column = 2, columnspan = 1, sticky = W)
+        self.buttonZ = Button(self, text = "Open", command = self.askopenfilez)
+        self.buttonY = Button(self, text = "Open", command = self.askopenfiley)
+        self.StartButton = Button(self, text = "Count", command = self.startcellcount, fg = 'Red', height = 5, width = 10)
+        self.buttonZ.grid(row =1, column = 3, columnspan = 1, sticky = W, padx = 5, pady = 3)
+        self.buttonY.grid(row =2, column = 3, columnspan = 1, sticky = W, padx = 5, pady = 3)
+        self.StartButton.grid(row=4,column = 4, columnspan = 2, sticky = W,pady = 3)
+
+
+    def askopenfilez(self):
+        filename = tkFileDialog.askopenfilename(**self.file_opt)
+        self.text.insert(INSERT,filename)
+
+    def askopenfiley(self):
+        filename = tkFileDialog.askopenfilename(**self.file_opt)
+        self.textp.insert(INSERT,filename)
+
+    def startcellcount(self):
+        Ztable = self.text.get("1.0",END)
+        Rtable = self.textp.get("1.0",END)
+        Rtable = Rtable.rstrip('\n')
+        Ztable = Ztable.rstrip('\n')
+        Ztable = str(Ztable)
+        Rtable = str(Rtable)
+        Results = Main(Ztable,Rtable)
+        self.label = Label(self, text= Results, fg = 'Red')
+        self.label.grid(row = 4, column = 2, columnspan = 1, sticky = W, padx = 5)
+
+
+
+root = Tk()
+root.title("Cell Counter")
+root.geometry("800x200")
+
+app = Application(root)
+
+root.mainloop()
