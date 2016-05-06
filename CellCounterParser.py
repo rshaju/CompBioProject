@@ -146,10 +146,7 @@ def BlobDestroyer (nt, avg_area):
         if item[2] == 2:
             numz = math.floor(item[1]/avg_area)
             total += numz
-
-
     return  total
-
 
 
 def Main(Ztable1,Rtable,size_threshold,error):
@@ -157,7 +154,6 @@ def Main(Ztable1,Rtable,size_threshold,error):
     #error = 15 #user input
     FinalCount = 0 #number of final cells to output to user
     singleCount = 0 #number of individual cells
-
 
     ParsedTable = ReadIntoTable(Rtable)
     z = Ztable (Ztable1)
@@ -190,23 +186,23 @@ class Application(Frame):
         Frame.__init__(self, master)
         self.grid()
 
-
-        self.dir_opts = options = {}
-        options['initialdir'] = 'C:\\'
-        options['mustexist'] = False
-        options['parent'] = master
-        options['title'] = 'This is a title'
-
-        self.file_opt = options = {}
+        self.filez_opt = options = {}
         options['defaultextension'] = '.txt'
         options['filetypes'] = [('all files', '.*'), ('text f    iles', '.txt')]
         options['initialdir'] = 'C:\\'
-        options['initialfile'] = 'myfile.txt'
+        options['initialfile'] = '.txt'
         options['parent'] = master
-        options['title'] = 'This is a title'
+        options['title'] = 'Select Z Table'
+
+        self.filer_opt = options = {}
+        options['defaultextension'] = '.txt'
+        options['filetypes'] = [('all files', '.*'), ('text f    iles', '.txt')]
+        options['initialdir'] = 'C:\\'
+        options['initialfile'] = '.txt'
+        options['parent'] = master
+        options['title'] = 'Select Location Table'
 
         self.create_widgets()
-
 
     def create_widgets(self):
         self.instruction = Label(self, text="Ztable Directory")
@@ -234,11 +230,11 @@ class Application(Frame):
 
 
     def askopenfilez(self):
-        filename = tkFileDialog.askopenfilename(**self.file_opt)
+        filename = tkFileDialog.askopenfilename(**self.filez_opt)
         self.text.insert(INSERT,filename)
 
     def askopenfiley(self):
-        filename = tkFileDialog.askopenfilename(**self.file_opt)
+        filename = tkFileDialog.askopenfilename(**self.filer_opt)
         self.textp.insert(INSERT,filename)
 
     def startcellcount(self):
@@ -261,8 +257,8 @@ class Application(Frame):
 
 
 root = Tk()
-root.title("Cell Counter")
-root.geometry("800x200")
+root.title("SRY Cell Counter")
+root.geometry("800x300")
 
 app = Application(root)
 
