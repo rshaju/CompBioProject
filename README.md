@@ -97,5 +97,4 @@ Schindelin, J.; Arganda-Carreras, I. & Frise, E. et al. (2012), "Fiji: an open-s
     - Recommendation for Gonads: ~50
 3. Input Cell Differentiation Value (How much the X and Y coordinates for each cell must differ by to be counted as different cells)
     - Recommendation for Gonads: ~15
-    - Recommendation for Neurons: ~7
 4. Click Count
