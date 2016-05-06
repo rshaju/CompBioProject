@@ -1,6 +1,6 @@
 # Automatic Cell Enumerator
 
-Automatic Cell Enumerator is a Python based cell counter that counts cells from outputted data tables from Fiji
+Automatic Cell Enumerator is a Python based cell counter that counts cells in three dimensional hyperstacks using data outputted by Fiji
 
 ## References
 
@@ -28,30 +28,17 @@ Software Requirements:
 Scripts:
 - Automatic Cell Enumerator.py
 
-Inputs:
-- Crosssection Cell Count Table from Analyze Particles (Ztable)
+Inputs for ImageJ:
+- .oib formated image stack containing 
 
-Example Z Table
-c:1/3; z:1/24 - Series 1	0	0.000	NaN	0.000	NaN	NaN	NaN
-c:1/3; z:2/24 - Series 1	0	0.000	NaN	0.000	NaN	NaN	NaN
-c:1/3; z:3/24 - Series 1	0	0.000	NaN	0.000	NaN	NaN	NaN
-c:1/3; z:4/24 - Series 1	0	0.000	NaN	0.000	NaN	NaN	NaN
-c:1/3; z:5/24 - Series 1	1	65.259	65.259	0.145	78.306	43.794	5110.172
-c:1/3; z:6/24 - Series 1	2	131.375	65.688	0.292	64.444	52.001	4336.083
-c:1/3; z:7/24 - Series 1	2	145.987	72.993	0.325	69.025	51.198	5049.541
-c:1/3; z:8/24 - Series 1	2	152.800	76.400	0.340	73.336	44.661	5611.098
+Inputs for Automatic Cell Enumerator
+- Crosssection Cell Count Table from Analyze Particles file (Ztable)
+- Cell Coordinate Table from Analyze Particles file (Rtable)
 
-- Cell Coordinate Table from Analyze Particles (Rtable)
-
-Example R table
-| Cell | Area    | Mean    | Min | Max | Perim.  | IntDen    | RawIntDen   | XStart | YStart |
-|------|---------|---------|-----|-----|---------|-----------|-------------|--------|--------|
-| 1    | 65.259  | 78.306  | 17  | 228 | 43.794  | 5110.172  | 119260.000  | 668    | 458    |
-| 2    | 72.029  | 80.671  | 16  | 251 | 43.380  | 5810.667  | 135608.000  | 664    | 457    |
-| 3    | 59.346  | 48.217  | 10  | 117 | 60.622  | 2861.499  | 66781.000   | 771    | 512    |
-| 4    | 74.557  | 76.166  | 12  | 241 | 47.236  | 5678.692  | 132528.000  | 664    | 456    |
-| 5    | 71.429  | 61.885  | 8   | 159 | 55.160  | 4420.389  | 103162.000  | 772    | 514    |
-| 6    | 72.372  | 71.295  | 16  | 176 | 46.529  | 5159.791  | 120418.000  | 670    | 455    |
-| 7    | 80.428  | 75.377  | 11  | 208 | 42.794  | 6062.405  | 141483.000  | 768    | 514    |
-
+To Product Rtable and Ztable in ImageJ:
+    1. Open .oib file containing cells in ImageJ 
+    2. If the hyper stack has multiple channels split the channels
+        -Image -> Color -> Split Channels
+    3. 
+    
 
