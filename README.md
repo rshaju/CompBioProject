@@ -1,7 +1,7 @@
-## Automatic Cell Enumerator
+# Automatic Cell Enumerator
 Automatic Cell Enumerator is a Python based cell counter that counts cells from outputted data tables from Fiji
 
-# References
+## References
 
 Jemc, J. C., Milutinovich, A. B., Weyers, J. J., Takeda, Y., and M. Van Doren. (2012) raw Functions through JNK signaling and cadherin-based adhesion to regulate Drosophila gonad morphogenesis. Dev. Biol. 367, 114-125.
 
