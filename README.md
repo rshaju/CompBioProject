@@ -1,6 +1,6 @@
 # Automatic Cell Enumerator
 
-Automatic Cell Enumerator is a Python based cell counter that counts cells in three dimensional hyperstacks using data outputted by Fiji
+Automatic Cell Enumerator is a Python based cell counter that counts cells in three dimensional hyper stacks using data outputted by Fiji
 
 ## References
 
@@ -23,16 +23,16 @@ Schindelin, J.; Arganda-Carreras, I. & Frise, E. et al. (2012), "Fiji: an open-s
 - Python 2.7
     - numpy package
 - ImageJ Fiji Distribution
-    - Analyize Particles Extention
+    - Analyze Particles Extension
 
 #####Scripts:
 - Automatic Cell Enumerator.py
 
 #####Inputs for ImageJ:
-- .oib formated image stack containing 
+- .oib formatted image stack containing 
 
 #####Inputs for Automatic Cell Enumerator
-- Crosssection Cell Count Table (Summary Table) from Analyze Particles file (Ztable)
+- Cross-section Cell Count Table (Summary Table) from Analyze Particles file (Ztable)
 - Cell Coordinate Table (Results Table) from Analyze Particles file (Rtable)
 
 ###To Produce Rtable and Ztable in ImageJ:
@@ -60,7 +60,7 @@ Schindelin, J.; Arganda-Carreras, I. & Frise, E. et al. (2012), "Fiji: an open-s
     Display Results, Clear results, Summarize, Add to Manager, Exclude on Edges, and Record Starts check boxes are checked
     Outlines are Showed
 
-#### Sample Results table Output 
+#### Sample Results Table Output 
 |      | Area    | Mean    | Min | Max | Perim.  | IntDen    | RawIntDen   | XStart | YStart |
 |------|---------|---------|-----|-----|---------|-----------|-------------|--------|--------|
 | 1    | 65.259  | 78.306  | 17  | 228 | 43.794  | 5110.172  | 119260.000  | 668    | 458    |
@@ -83,10 +83,9 @@ Schindelin, J.; Arganda-Carreras, I. & Frise, E. et al. (2012), "Fiji: an open-s
 
 ### To Count Cells using ACE
 1. Open both Ztable and Rtable in corresponding fields
-2. Input Size Threshold (Mimimum Cell Size)
+2. Input Size Threshold (Minimum Cell Size)
     - Recommendation for Gonads: ~50
 3. Input Cell Differentiation Value (How much the X and Y coordinates for each cell must differ by to be counted as different cells)
     - Recommendation for Gonads: ~15
     - Recommendation for Neurons: ~7
 4. Click Count
-
