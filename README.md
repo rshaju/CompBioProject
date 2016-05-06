@@ -47,6 +47,7 @@ Schindelin, J.; Arganda-Carreras, I. & Frise, E. et al. (2012), "Fiji: an open-s
 5. Click Set and then Confirm Threshold selection
 6. Count Cells using Analyze Particles
     - Analyze -> Analyze Particles
+7. Save Ouput tables as .txt files
 
 #####Recommend Settings for Analyze Particles
     Neurons
