@@ -47,7 +47,12 @@ Schindelin, J.; Arganda-Carreras, I. & Frise, E. et al. (2012), "Fiji: an open-s
 5. Click Set and then Confirm Threshold selection
 6. Count Cells using Analyze Particles
     - Analyze -> Analyze Particles
-7. Save Results Table and Summary table as .txt files
+7. Set Measurements in Results Table Window
+    - Results -> Set Measurements
+8. Check Area, Min Max Gray Value, Integrated Density, Mean Gray Value, and Perimeter checkboxes
+    - This is to ensure that both the results table and z table have the proper types of information
+    - If your table is missing columns and does not look similar to the tables provided below you will have to set your measurements and run Analyze Particles again
+8. Save Results Table and Summary table as .txt files
 
 #####Recommend Settings for Analyze Particles
     Neurons
