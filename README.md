@@ -1,3 +1,3 @@
 # Automatic Cell Enumerator
-CompBioProject
-Proof that Salman can work GitHub
+Automatic Cell Enumerator is a Python based cell counter that counts cells from outputted data tables from Fiji
+
