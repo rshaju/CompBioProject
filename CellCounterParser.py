@@ -152,9 +152,9 @@ def BlobDestroyer (nt, avg_area):
 
 
 
-def Main(Ztable1,Rtable):
-    size_threshold = 50.87 #user input
-    error = 15 #user input
+def Main(Ztable1,Rtable,size_threshold,error):
+    #size_threshold = 50.87 #user input
+    #error = 15 #user input
     FinalCount = 0 #number of final cells to output to user
     singleCount = 0 #number of individual cells
 
@@ -211,10 +211,18 @@ class Application(Frame):
     def create_widgets(self):
         self.instruction = Label(self, text="Ztable Directory")
         self.instruction2 = Label(self, text="Cell Location Table")
+        self.instruction3 = Label(self, text="Size Treshold")
+        self.instruction4 = Label(self, text="Error")
         self.instruction.grid(row = 1, column = 0, columnspan = 2, sticky = W)
         self.instruction2.grid(row= 2, column= 0, columnspan = 2, sticky = W)
+        self.instruction3.grid(row=3, column = 0, columnspan = 2, sticky = W)
+        self.instruction4.grid(row=4, column = 0, columnspan = 2, sticky = W)
         self.text = Text(self, width = 50, height = 1, wrap = WORD)
         self.textp = Text(self, width = 50, height = 1, wrap = WORD)
+        self.treshold = Text(self, width = 20, height = 1, wrap = WORD)
+        self.error = Text(self, width =20, height = 1, wrap = WORD)
+        self.treshold.grid(row = 3, column = 2, columnspan = 1, sticky = W)
+        self.error.grid(row = 4, column = 2, columnspan = 1, sticky = W)
         self.text.grid(row =1, column = 2, columnspan = 1, sticky = W)
         self.textp.grid(row =2, column = 2, columnspan = 1, sticky = W)
         self.buttonZ = Button(self, text = "Open", command = self.askopenfilez)
@@ -222,7 +230,7 @@ class Application(Frame):
         self.StartButton = Button(self, text = "Count", command = self.startcellcount, fg = 'Red', height = 5, width = 10)
         self.buttonZ.grid(row =1, column = 3, columnspan = 1, sticky = W, padx = 5, pady = 3)
         self.buttonY.grid(row =2, column = 3, columnspan = 1, sticky = W, padx = 5, pady = 3)
-        self.StartButton.grid(row=4,column = 4, columnspan = 2, sticky = W,pady = 3)
+        self.StartButton.grid(row=5,column = 4, columnspan = 2, sticky = W,pady = 3)
 
 
     def askopenfilez(self):
@@ -236,13 +244,19 @@ class Application(Frame):
     def startcellcount(self):
         Ztable = self.text.get("1.0",END)
         Rtable = self.textp.get("1.0",END)
+        Error = self.error.get("1.0",END)
+        Treshold= self.treshold.get("1.0",END)
+        Error = Error.rstrip('\n')
+        Treshold = Treshold.rstrip('\n')
+        Error = int(Error)
+        Treshold = float(Treshold)
         Rtable = Rtable.rstrip('\n')
         Ztable = Ztable.rstrip('\n')
         Ztable = str(Ztable)
         Rtable = str(Rtable)
-        Results = Main(Ztable,Rtable)
+        Results = Main(Ztable,Rtable,Treshold,Error)
         self.label = Label(self, text= Results, fg = 'Red')
-        self.label.grid(row = 4, column = 2, columnspan = 1, sticky = W, padx = 5)
+        self.label.grid(row = 5, column = 2, columnspan = 1, sticky = W, padx = 5)
 
 
 
