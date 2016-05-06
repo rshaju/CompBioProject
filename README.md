@@ -32,8 +32,8 @@ Schindelin, J.; Arganda-Carreras, I. & Frise, E. et al. (2012), "Fiji: an open-s
 - .oib formated image stack containing 
 
 #####Inputs for Automatic Cell Enumerator
-- Crosssection Cell Count Table from Analyze Particles file (Ztable)
-- Cell Coordinate Table from Analyze Particles file (Rtable)
+- Crosssection Cell Count Table (Summary Table) from Analyze Particles file (Ztable)
+- Cell Coordinate Table (Results Table) from Analyze Particles file (Rtable)
 
 ###To Produce Rtable and Ztable in ImageJ:
 
@@ -47,7 +47,7 @@ Schindelin, J.; Arganda-Carreras, I. & Frise, E. et al. (2012), "Fiji: an open-s
 5. Click Set and then Confirm Threshold selection
 6. Count Cells using Analyze Particles
     - Analyze -> Analyze Particles
-7. Save Ouput tables as .txt files
+7. Save Results Table and Summary table as .txt files
 
 #####Recommend Settings for Analyze Particles
     Neurons
@@ -60,7 +60,7 @@ Schindelin, J.; Arganda-Carreras, I. & Frise, E. et al. (2012), "Fiji: an open-s
     Display Results, Clear results, Summarize, Add to Manager, Exclude on Edges, and Record Starts check boxes are checked
     Outlines are Showed
 
-#### Sample Rtable Output 
+#### Sample Results table Output 
 |      | Area    | Mean    | Min | Max | Perim.  | IntDen    | RawIntDen   | XStart | YStart |
 |------|---------|---------|-----|-----|---------|-----------|-------------|--------|--------|
 | 1    | 65.259  | 78.306  | 17  | 228 | 43.794  | 5110.172  | 119260.000  | 668    | 458    |
@@ -71,7 +71,7 @@ Schindelin, J.; Arganda-Carreras, I. & Frise, E. et al. (2012), "Fiji: an open-s
 | 6    | 72.372  | 71.295  | 16  | 176 | 46.529  | 5159.791  | 120418.000  | 670    | 455    |
 | 7    | 80.428  | 75.377  | 11  | 208 | 42.794  | 6062.405  | 141483.000  | 768    | 514    |
 
-#### Sample Z Table Output
+#### Sample Summary Table Output
 | Slice                     | Count | Total Area | Average Size | %Area | Mean    |
 |---------------------------|-------|------------|--------------|-------|---------|
 | c:1/3; z:1/13 - Series 1  | 10    | 957.932    | 95.793       | 0.059 | 117.496 |
