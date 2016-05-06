@@ -1,14 +1,8 @@
-import os
 import numpy as np
 from csv import reader
 import math
 import Tkinter, tkFileDialog, Tkconstants
 from Tkinter import *
-
-
-#filepath = '/Users/Rahul/Desktop/'
-#os.chdir(filepath)
-
 
 def Ztable (zfile): #function to read in Z file
     csv_reader = reader(open(zfile,'r'), quotechar = "\"") #Read in the file
@@ -27,7 +21,6 @@ def Ztable (zfile): #function to read in Z file
             Zlist.append(zlist) #add new list to list holding all cs & cc
     Zlist = np.array(Zlist) #convert & return as numpy array
     return Zlist
-
 
 def ReadIntoTable(resultsfile): #function to read Restuls into table
     f = open (resultsfile,'r') #opens the results file
@@ -255,9 +248,8 @@ class Application(Frame):
         self.label.grid(row = 5, column = 2, columnspan = 1, sticky = W, padx = 5)
 
 
-
 root = Tk()
-root.title("SRY Cell Counter")
+root.title("Automatic Cell Enumerator")
 root.geometry("800x300")
 
 app = Application(root)
