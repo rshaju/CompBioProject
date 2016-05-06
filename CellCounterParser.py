@@ -200,8 +200,8 @@ class Application(Frame):
     def create_widgets(self):
         self.instruction = Label(self, text="Ztable Directory")
         self.instruction2 = Label(self, text="Cell Location Table")
-        self.instruction3 = Label(self, text="Size Treshold")
-        self.instruction4 = Label(self, text="Error")
+        self.instruction3 = Label(self, text="Minimum Cell Size")
+        self.instruction4 = Label(self, text="Cell Differentiation Value")
         self.instruction.grid(row = 1, column = 0, columnspan = 2, sticky = W)
         self.instruction2.grid(row= 2, column= 0, columnspan = 2, sticky = W)
         self.instruction3.grid(row=3, column = 0, columnspan = 2, sticky = W)
@@ -247,10 +247,9 @@ class Application(Frame):
         self.label = Label(self, text= Results, fg = 'Red')
         self.label.grid(row = 5, column = 2, columnspan = 1, sticky = W, padx = 5)
 
-
 root = Tk()
 root.title("Automatic Cell Enumerator")
-root.geometry("800x300")
+root.geometry("850x275")
 
 app = Application(root)
 
