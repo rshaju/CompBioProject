@@ -59,3 +59,13 @@ Schindelin, J.; Arganda-Carreras, I. & Frise, E. et al. (2012), "Fiji: an open-s
     
     Display Results, Clear results, Summarize, Add to Manager, Exclude on Edges, and Record Starts check boxes are checked
     Outlines are Showed
+
+### To Count Cells using ACE
+1. Open both Ztable and Rtable in corresponding fields
+2. Input Size Threshold (Mimimum Cell Size)
+    - Recommendation for Gonads: ~50
+3. Input Cell Differentiation Value (How much the X and Y coordinates for each cell must differ by to be counted as different cells)
+    - Recommendation for Gonads: ~15
+    - Recommendation for Neurons: ~7
+4. Click Count
+
