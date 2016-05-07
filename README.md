@@ -22,7 +22,7 @@ Schindelin, J.; Arganda-Carreras, I. & Frise, E. et al. (2012), "Fiji: an open-s
 - Mac OS or Windows 7,8, or 10
 - Python 2.7
     - numpy package
-- ImageJ Fiji Distribution
+- [ImageJ Fiji Distribution](http://imagej.net/Fiji/Downloads)
     - Analyze Particles Extension
 
 #####Scripts:
